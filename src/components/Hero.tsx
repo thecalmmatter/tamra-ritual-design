@@ -1,17 +1,29 @@
 
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 const Hero = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Video */}
-      <div className="absolute inset-0">
+      {/* Background Video with Parallax */}
+      <div 
+        className="absolute inset-0 parallax-element"
+        style={{ transform: `translateY(${scrollY * 0.5}px)` }}
+      >
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover scale-110"
         >
           <source src="https://videos.pexels.com/video-files/3195394/3195394-uhd_2560_1440_25fps.mp4" type="video/mp4" />
           {/* Fallback image if video fails to load */}
@@ -30,7 +42,7 @@ const Hero = () => {
         {[...Array(8)].map((_, i) => (
           <div
             key={i}
-            className="absolute w-1 h-1 bg-copper-300/40 rounded-full animate-pulse"
+            className="absolute w-1 h-1 bg-copper-300/40 rounded-full animate-gentle-pulse"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -55,27 +67,27 @@ const Hero = () => {
       
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in">
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg">
+        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg animate-stagger-1">
           Ancient Wellness.
           <br />
-          <span className="text-copper-300 drop-shadow-lg">Modern Ritual.</span>
+          <span className="text-copper-300 drop-shadow-lg copper-shimmer">Modern Ritual.</span>
         </h1>
         
-        <p className="text-xl md:text-2xl text-white/95 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+        <p className="text-xl md:text-2xl text-white/95 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-md animate-stagger-2">
           Explore handcrafted copper bottles inspired by Ayurvedic purity and contemporary elegance.
         </p>
         
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-stagger-3">
           <Button 
             size="lg" 
-            className="bg-copper-500 hover:bg-copper-600 text-white px-8 py-4 text-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            className="btn-copper bg-copper-500 hover:bg-copper-600 text-white px-8 py-4 text-lg font-medium shadow-xl hover:shadow-2xl"
           >
             Shop Now
           </Button>
           <Button 
             variant="outline" 
             size="lg" 
-            className="border-2 border-white/80 text-white hover:bg-white hover:text-copper-800 px-8 py-4 text-lg font-medium transition-all duration-300 backdrop-blur-sm bg-white/10"
+            className="btn-copper border-2 border-white/80 text-white hover:bg-white hover:text-copper-800 px-8 py-4 text-lg font-medium backdrop-blur-sm bg-white/10"
           >
             Learn More
           </Button>
@@ -84,7 +96,7 @@ const Hero = () => {
       
       {/* Enhanced Copper Droplet Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="relative">
+        <div className="relative copper-shimmer">
           {/* Copper droplet shape */}
           <div className="w-6 h-8 bg-gradient-to-b from-copper-300 to-copper-500 rounded-full relative">
             {/* Droplet tip */}

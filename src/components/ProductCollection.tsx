@@ -59,7 +59,7 @@ const ProductCollection = () => {
           {products.map((product, index) => (
             <div
               key={index}
-              className={`group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 ${
+              className={`interactive-card group bg-white rounded-2xl shadow-lg overflow-hidden copper-shimmer ${
                 isVisible 
                   ? 'opacity-100 translate-y-0' 
                   : 'opacity-0 translate-y-10'
@@ -73,10 +73,11 @@ const ProductCollection = () => {
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-copper-400/0 group-hover:bg-copper-400/10 transition-all duration-300"></div>
               </div>
               
               <div className="p-6">
-                <h3 className="text-2xl font-semibold text-copper-800 mb-2">
+                <h3 className="text-2xl font-semibold text-copper-800 mb-2 group-hover:text-copper-600 transition-colors">
                   {product.name}
                 </h3>
                 <p className="text-copper-600 mb-4">
@@ -87,12 +88,13 @@ const ProductCollection = () => {
                     {product.price}
                   </span>
                   <Button 
-                    className="bg-copper-500 hover:bg-copper-600 text-white"
+                    className="btn-copper bg-copper-500 hover:bg-copper-600 text-white"
                   >
                     Add to Cart
                   </Button>
                 </div>
               </div>
+              <div className="card-shimmer absolute inset-0 rounded-2xl opacity-0"></div>
             </div>
           ))}
         </div>
